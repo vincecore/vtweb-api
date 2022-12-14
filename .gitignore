@@ -8,3 +8,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+/bin/deployer.phar
+/create_release_tag.sh
+/deploy.php
+/Makefile
