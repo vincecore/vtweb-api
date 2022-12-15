@@ -16,14 +16,15 @@ http:
   static:
     dir: "public"
     forbid: [ ".php", ".htaccess" ]
+  access_logs: true
 
 logs:
-  mode: production
+  mode: development
   channels:
     http:
       level: debug # Log all http requests, set to info to disable
     server:
-      level: info # Everything written to worker stderr is logged
+      level: debug # Everything written to worker stderr is logged
       mode: raw
     metrics:
       level: error
