@@ -12,7 +12,7 @@ class TestController extends AbstractController
     public function home(): Response
     {
         return new Response(
-            '<html><body>vtweb</body></html>'
+            '<html><body>vtweb 2</body></html>'
         );
     }
 }
