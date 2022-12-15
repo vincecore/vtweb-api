@@ -12,3 +12,7 @@
 /create_release_tag.sh
 /deploy.php
 /Makefile
+
+###> baldinof/roadrunner-bundle ###
+/bin/rr
+###< baldinof/roadrunner-bundle ###
