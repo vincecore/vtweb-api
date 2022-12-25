@@ -1,5 +1,5 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+shopping_controllers:
+  resource:
+    path: ../src/Shopping/Infrastructure/Controller
+    namespace: VTweb\Shopping\Controller
+  type: attribute
