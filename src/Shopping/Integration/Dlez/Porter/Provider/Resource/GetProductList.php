@@ -5,9 +5,9 @@ namespace VTweb\Shopping\Integration\Dlez\Porter\Provider\Resource;
 
 use Psr\Log\LoggerInterface;
 use ScriptFUSION\Porter\Connector\ImportConnector;
-use ScriptFUSION\Porter\Net\Http\HttpDataSource;
 use ScriptFUSION\Porter\Provider\Resource\ProviderResource;
 use ScriptFUSION\Retry\ExceptionHandler\ExponentialBackoffExceptionHandler;
+use VTweb\Shopping\Integration\Dlez\Porter\HttpDataSource;
 use VTweb\Shopping\Integration\Dlez\Porter\Provider\DlezProvider;
 use function ScriptFUSION\Retry\retry;
 
@@ -15,7 +15,7 @@ class GetProductList implements ProviderResource, Url
 {
     private int $pageNumber = 1;
 
-    private string $hash = '';
+    private string $hash = '10ddc63b94cf5c83b7474746ae22bab24e83d503834a72942577672af7df4cb2';
 
     public function __construct(private readonly LoggerInterface $logger)
     {
@@ -43,9 +43,11 @@ class GetProductList implements ProviderResource, Url
                         JSON_THROW_ON_ERROR
                     );
 
-                    dump($page);
+                    $currentPage = $page['data']['categoryProductSearch']['pagination']['currentPage'];
+                    $totalResults = $page['data']['categoryProductSearch']['pagination']['totalResults'];
+                    $totalPages = $page['data']['categoryProductSearch']['pagination']['totalPages'];
 
-                    $this->logger->info('Import ' . $pageNumber, $page);
+                    $this->logger->info('Import ' . $pageNumber . '. ' . $currentPage . '/' . $totalPages . ' - ' . $totalResults, $page);
 
                     if (\count($page['data']['categoryProductSearch']['products']) === 0) {
                         $pageNumber = null;
@@ -53,6 +55,7 @@ class GetProductList implements ProviderResource, Url
                     }
 
                     $pageNumber++;
+                    $this->pageNumber = $pageNumber;
 
                     return $page['data']['categoryProductSearch']['products'];
                 },

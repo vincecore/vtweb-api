@@ -16,9 +16,15 @@ services:
 
   VTweb\Shopping\:
     resource: '../src/Shopping/'
+    exclude:
+      - '../src/Shopping/Domain'
+      - '../src/Shopping/Integration/Dlez/Porter/HttpDataSource.php'
+      - '../src/Shopping/Integration/Dlez/Porter/CachingConnector.php'
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
+
+  VTweb\Shopping\Domain\Product\ProductRepository: ~
 
   ScriptFUSION\Porter\Porter:
     arguments:
