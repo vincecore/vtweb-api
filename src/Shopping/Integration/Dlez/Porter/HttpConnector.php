@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace VTweb\Shopping\Integration\Dlez\Porter;
@@ -37,7 +38,7 @@ class HttpConnector implements Connector
 
     public function __construct(HttpOptions $options = null, TlsOptions $tlsOptions = null, CookieJar $cookieJar = null)
     {
-        $this->options = $options ?: new HttpOptions;
+        $this->options = $options ?: new HttpOptions();
         $this->cookieJar = $cookieJar ?: new LocalCookieJar();
         $this->pool = new UnlimitedConnectionPool($tlsOptions ? new DefaultConnectionFactory(
             connectContext: (new ConnectContext())->withTlsContext($tlsOptions->toAmpContext())
